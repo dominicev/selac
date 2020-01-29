@@ -5302,6 +5302,11 @@ SelacHMMOptimize <- function(codon.data.path, n.partitions=NULL, phy, data.type=
   number.of.current.restarts <- 1
   best.lik <- 1000000
   while(number.of.current.restarts < (max.restarts+1)){
+    
+    results.vector <- c(likelihood, C*Phi*q, alpha, beta, gamma, Ne, ape::write.tree(phy)) #Output the final result of trhe RR before restarting
+                    names(results.vector) <- c("likelihood", "C.Phi.q.Ne", "alpha", "beta", "gamma", "Ne", "phy")
+                    print(results.vector)
+     
     cat(paste("Finished. Performing random restart ", number.of.current.restarts," ...", sep=""), "\n")
     mle.pars.mat <- index.matrix
     mle.pars.mat[] <- c(ip.vector, 0)[index.matrix]
